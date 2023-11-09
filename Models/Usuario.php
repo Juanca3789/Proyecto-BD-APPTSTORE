@@ -17,5 +17,10 @@
             $rs = $rs->fetch_object();
             return $rs;
         }
+        public function comprarLicencias(int $idUsuario, string $nombreJuego, int $cantidad, int $descuento){
+            $rs = $this->conexion->query("CALL comprarLicencias('{$idUsuario}','{$nombreJuego}','{$cantidad}','{$descuento}')");
+            $rs = $rs->fetch_object();
+            return $rs;
+        }
     }
 ?>
