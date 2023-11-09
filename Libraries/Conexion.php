@@ -12,5 +12,5 @@
         }
     }
     //$prueba = new Conexion();
-    //$prueba->conect();
+    //$prueba->connect();
 ?>
