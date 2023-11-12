@@ -1,7 +1,16 @@
 const baseUrl = "http://localhost/DBproyecto/Proyecto-BD-APPTSTORE/";
 
-async function obtenerJuego(nombre){
-    const tarjeta = document.getElementById("Juego 1");
+function carga(){
+    let arr = ["8 Ball Pool", "Call Of Duty Mobile", "Cut The Rope GOLD", "EA SPORTS FC Mobile"];
+    let i = 1;
+    arr.forEach(element => {
+        obtenerJuego(element, i);
+        i = i + 1;
+    });
+}
+
+async function obtenerJuego(nombre, numero){
+    const tarjeta = document.getElementById("Juego " + numero);
     let form = new FormData();
     form.append("nombreJuego", nombre);
     let resp = await fetch(
