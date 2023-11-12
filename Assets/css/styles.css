@@ -5,15 +5,53 @@ body {
     background-color: #f0f0f0;
 }
 
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 12px;
+    z-index: 1;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.icon-user {
+    font-size: 24px;
+    margin-right: 8px;
+}
+
+input[type=text], input[type=password], input[type=submit], input[type=button] {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+input[type=submit], input[type=button] {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
 header {
     background-color: #333;
-    color: #fff;
     text-align: center;
     padding: 20px;
 }
 
 h1 {
     margin: 0;
+    color: #fff;
 }
 
 main {

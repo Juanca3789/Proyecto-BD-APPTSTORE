@@ -6,9 +6,26 @@
     <link rel="stylesheet" href="../Assets/css/styles.css">
     <title>Tienda de Juegos</title>
 </head>
-<body onload="carga()">
+<body onload="carga(), controlForm()">
     <header>
-        <h1>Tienda de Juegos</h1>
+        <div class="dropdown">
+            <span class="icon-user">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                </svg>
+            </span>
+            <div class="dropdown-content" id = "Contenido">
+                <h5> Inicia sesión </h5>
+                <form id="sesión">
+                    <label for="Nombre">Usuario:</label>
+                    <input type="text" id="Nombre" name="Nombre" required>
+                    <input type="submit" value="Iniciar sesión">
+                    <input type="button" value="Registrarse" onclick="Registro()">
+                </form>
+            </div>
+        </div>
+        <h1 style="float: right; margin-right: 43%;">Tienda de Juegos</h1>
     </header>
     <main>
         <section class="game" id = "Juego 1">
@@ -25,4 +42,5 @@
     </footer>
 </body>
 <script src="../Assets/js/functionsTienda.js"></script>
+<script src="../Assets/js/functionsUsuario.js"></script>
 </html>
