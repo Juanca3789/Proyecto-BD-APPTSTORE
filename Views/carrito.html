@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
     <link rel="stylesheet" href="../Assets/css/styles.css">
-    <title>Tienda de Juegos</title>
 </head>
-<body onload="carga(), controlForm()">
+<body onload="carrito(), controlForm()">
     <header>
         <div class="dropdown">
             <span class="icon-user">
@@ -25,25 +25,19 @@
                 </form>
             </div>
         </div>
-        <h1 style="float: right; margin-right: 43%;">Tienda de Juegos</h1>
+        <h1 style="float: right; margin-right: 43%;">Carrito de compras</h1>
         <div class="dropdown">
-            <button onclick="window.location.assign(baseUrl + 'Views/carrito.html')">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
-                    <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+            <button onclick="window.location.assign(baseUrl + 'Views/index.html')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
                 </svg>
             </button>
         </div>
     </header>
-    <main>
-        <section class="game" id = "Juego 1">
-        </section>
-        <section class="game" id = "Juego 2">
-        </section>
-        <section class="game" id = "Juego 3">
-        </section>
-        <section class="game" id = "Juego 4">
-        </section>
-    </main>
+
+    <section class="cart" id = "cart">
+    </section>
+
     <footer>
         <p>Tienda de Juegos - Grupo #6 &copy;</p>
     </footer>

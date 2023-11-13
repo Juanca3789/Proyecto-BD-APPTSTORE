@@ -30,6 +30,47 @@ function producto(){
     obtenerJuego2(result);
 }
 
+function carrito(){
+    sessionStorage.setItem("Total", 0);
+    var arr = sessionStorage;
+    var n = arr.length;
+    for(var i = 0; i <= n/2; i++){
+        if(arr["producto" + i] != null){
+            var nombre = arr["producto" + i];
+            var cantidad = arr["cantidad" + i];
+            obtenerJuego3(nombre, cantidad);
+        }
+    }
+    setTimeout(() => {
+        const carrito = document.getElementById("cart");
+        const total = document.createElement("div");
+        total.className = "cart-total";
+        const parrafo = document.createElement("p");
+        parrafo.textContent = "Total: " + sessionStorage.getItem("Total");
+        const button = document.createElement("button");
+        button.textContent = "Finalizar compra";
+        button.addEventListener("click", () => {
+            if(sessionStorage.getItem("Id")){
+                var arr2 = sessionStorage;
+                var n2 = arr2.length;
+                for(var i = 0; i <= n2/2; i++){
+                    if(arr2["producto" + i] != null){
+                        var nombre = arr["producto" + i];
+                        var cantidad = arr["cantidad" + i];
+                        Comprar(sessionStorage.getItem("Id"), nombre, cantidad, 0);
+                    }
+                }
+            }
+            else{
+                window.alert("No has iniciado sesión");
+            }
+        });
+        total.appendChild(parrafo);
+        carrito.appendChild(total);
+        carrito.appendChild(button);
+    }, 50);
+}
+
 async function obtenerJuego(nombre, numero){
     const tarjeta = document.getElementById("Juego " + numero);
     let form = new FormData();
@@ -126,4 +167,83 @@ async function obtenerJuego2(nombre){
         tarjeta.appendChild(selector);
         tarjeta.appendChild(button);
     }
+}
+
+async function obtenerJuego3(nombre, cantidad){
+    const tarjeta = document.getElementById("cart");
+    let form = new FormData();
+    form.append("nombreJuego", nombre);
+    let resp = await fetch(
+    baseUrl + "Controllers/obtenerInfo.php",
+    {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        body: form,
+    }
+    );
+    json = await resp.json();
+
+    if(json != null){
+        const div = document.createElement("div");
+        div.className = "cart-item";
+        const img = document.createElement("img");
+        img.src = "data:/image/png;base64," + json.Imagen;
+        img.alt = json.Nombre;
+        img.width = 75;
+        img.height = 75;
+        const div2 = document.createElement("div");
+        div2.className = "cart-item-details";
+        const h3 = document.createElement("h3");
+        h3.textContent = json.Nombre;
+        const p = document.createElement("p");
+        p.textContent = "Precio: $" + json.PrecioLicencia;
+        const p2 = document.createElement("p");
+        p2.textContent = "Total: $" + (json.PrecioLicencia * cantidad);
+        const selector = document.createElement("div");
+        selector.className = "quantity-selector"
+        const label = document.createElement("label");
+        label.textContent = "Cantidad: ";
+        const input = document.createElement("input");
+        input.type = "number";
+        input.name = "quantity";
+        input.min = "1";
+        input.value = cantidad;
+        selector.appendChild(label);
+        selector.appendChild(input);
+        div2.appendChild(h3);
+        div2.appendChild(p);
+        div2.appendChild(p2);
+        div2.appendChild(selector);
+        div.appendChild(img);
+        div.appendChild(div2);
+        tarjeta.appendChild(div);
+        var num = Number(sessionStorage.getItem("Total"));
+        sessionStorage.removeItem("Total");
+        num = num + (json.PrecioLicencia * cantidad);
+        sessionStorage.setItem("Total", num);
+    }
+}
+
+async function Comprar(Id, NJuego, Cantidad, Descuento){
+    let form = new FormData();
+    form.append("Id", Id);
+    form.append("NJuego", NJuego);
+    form.append("Cantidad", Cantidad);
+    form.append("Descuento", Descuento);
+        let resp = await fetch(
+            baseUrl + "Controllers/comprarLicencias.php",
+            {
+                method: "POST",
+                mode: "cors",
+                cache: "no-cache",
+                body: form,
+            }
+        );
+        json = await resp.json();
+        if(json.result == "Compra realizada correctamente"){
+            sessionStorage.clear();
+            window.alert("Compra finalizada, redirigiendo a pagina principal");
+            window.location.assign(baseUrl + "Views/index.html");
+        }
 }
